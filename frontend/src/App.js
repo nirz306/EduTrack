@@ -7,7 +7,10 @@ function App() {
   return (
     <div>
       <h1>Welcome to the Student Attendance Management System</h1>
-	  <BasicTable/>
+      <div className="flex justify-center items-center ">
+  <BasicTable />
+  <AttendanceButton/>
+</div>
 	  
     </div>
   );

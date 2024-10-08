@@ -3,7 +3,7 @@ package com.example.demo.model;
 public class Student {
     private String name;
     private String subjectName;
-    private int total_present;
+    private int total_present; 
     private int total_absent;
 
     // Getters and setters
