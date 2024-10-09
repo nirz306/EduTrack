@@ -44,7 +44,7 @@ export default function Dashboard() {
           <TableRow>
             <StyledTableCell>Subjects</StyledTableCell>
             <StyledTableCell align="right">Present</StyledTableCell>
-            <StyledTableCell align="right">Total Lecture</StyledTableCell>
+            <StyledTableCell align="right">Total Lectures</StyledTableCell>
             <StyledTableCell align="right">Percentage&nbsp;</StyledTableCell>
           </TableRow>
         </TableHead>
@@ -57,8 +57,8 @@ export default function Dashboard() {
                   {att.subjectName} {/* Use subject name from attendance data */}
                 </StyledTableCell>
                 
-                <StyledTableCell align="right">{att.totalPresentAbsent}</StyledTableCell>
-                <StyledTableCell align="right">{att.totalPresentAbsent}</StyledTableCell>
+                <StyledTableCell align="right">{att.totalPresent}</StyledTableCell>
+                <StyledTableCell align="right">{att.totalLectures}</StyledTableCell>
                 
 				<StyledTableCell align="right">{att.percentage}%</StyledTableCell>
               </TableRow>

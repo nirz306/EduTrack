@@ -55,11 +55,15 @@ export default function Dashboard() {
             attendanceData.map((att, index) => (
               <TableRow key={index}>
                 <StyledTableCell component="th" scope="row">
-                  {att.subjectName} {/* Use subject name from attendance data */}
+                  {att.attendanceDate} {/* Use subject name from attendance data */}
                 </StyledTableCell>
                 
-                <StyledTableCell align="right">{att.totalPresentAbsent}</StyledTableCell>
-				<StyledTableCell align="right">{att.percentage}%</StyledTableCell>
+                <StyledTableCell align="right">{att.dbms_status}</StyledTableCell>
+				<StyledTableCell align="right">{att.toc_status}</StyledTableCell>
+				<StyledTableCell align="right">{att.cns_status}</StyledTableCell>
+				<StyledTableCell align="right">{att.spos_status}</StyledTableCell>
+				<StyledTableCell align="right">{att.hci_status}</StyledTableCell>
+				
               </TableRow>
             ))
           ) : (

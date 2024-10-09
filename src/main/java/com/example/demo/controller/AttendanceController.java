@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import com.example.demo.dao.AttendanceDAO;
 import com.example.demo.model.Attendance;
+import com.example.demo.model.DateWise;
 import com.example.demo.model.Student;
 import com.example.demo.model.UpdatedStudent;
 
@@ -35,7 +36,7 @@ public class AttendanceController {
     }
 	 
 	 @GetMapping("/datewise")
-	    public List<UpdatedStudent> getDatewise(@RequestParam int studentId) {
+	    public List<DateWise> getDatewise(@RequestParam int studentId) {
 	        return attendanceDAO.getDatewise(studentId);
 	    }
     

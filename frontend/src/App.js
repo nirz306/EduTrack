@@ -3,6 +3,7 @@ import AttendanceButton from "./components/AttendanceButtons";
 import TotalPresentTotalAbsentButton from "./components/TotalPresentTotalAbsentButton";
 import BasicTable from "./components/BasicTable";
 import Dashboard from "./components/Dashboard"
+import Datewise from "./components/Datewise";
 
 function App() {
   return (
@@ -12,7 +13,11 @@ function App() {
 	  
  
   
+  
   <Dashboard/>
+  
+  
+  
 </div>
 
 
