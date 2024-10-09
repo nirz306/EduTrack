@@ -3,6 +3,7 @@ package com.example.demo.dao;
 import com.example.demo.config.DatabaseConfig;
 import com.example.demo.model.Attendance;
 import com.example.demo.model.Student;
+import com.example.demo.model.UpdatedStudent;
 
 import java.sql.*;
 import java.util.*;
@@ -66,6 +67,35 @@ public class AttendanceDAO
         }
         return studentList;
     }
+	
+	public List<UpdatedStudent> getDashboard(int studentId) {
+        List<UpdatedStudent> dashboardList = new ArrayList<>();
+        String sql = "SELECT  sub.subjectName, count(case when a.status = 'P' then 1 end) as totalPresentAbsent, count(case when a.status = 'P' then 1 end) *100.0 / count(*) as percentage FROM attendance a "
+                   + "JOIN student s ON a.studentId = s.studentId "
+                   + "JOIN subjects sub ON a.subjectId = sub.subjectId WHERE s.studentId = ?  group by s.name , sub.subjectName";
+
+        try (Connection connection = DatabaseConfig.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+
+            statement.setInt(1, studentId);
+            ResultSet rs = statement.executeQuery();
+
+            while (rs.next()) {
+                UpdatedStudent updatedS = new UpdatedStudent();
+               
+                updatedS.setSubjectName(rs.getString("subjectName"));
+                updatedS.settotalPresentAbsent(rs.getString("totalPresentAbsent"));
+                updatedS.setPercentage(rs.getDouble("percentage"));
+
+                dashboardList.add(updatedS);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return dashboardList;
+    }
+	
 	
 	
 	
