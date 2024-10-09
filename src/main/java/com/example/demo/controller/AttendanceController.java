@@ -33,6 +33,11 @@ public class AttendanceController {
     public List<UpdatedStudent> getDashboard(@RequestParam int studentId) {
         return attendanceDAO.getDashboard(studentId);
     }
+	 
+	 @GetMapping("/datewise")
+	    public List<UpdatedStudent> getDatewise(@RequestParam int studentId) {
+	        return attendanceDAO.getDatewise(studentId);
+	    }
     
     
 }

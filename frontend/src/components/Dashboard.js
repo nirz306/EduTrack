@@ -11,7 +11,7 @@ import { styled } from '@mui/material/styles';
 
 // Custom styling for the table
 const StyledTableContainer = styled(TableContainer)({
-  backgroundColor: 'black', // Table background color
+  backgroundColor: '#293d75', // Table background color
   color: 'white', // Text color for the table
 });
 
@@ -43,7 +43,8 @@ export default function Dashboard() {
         <TableHead>
           <TableRow>
             <StyledTableCell>Subjects</StyledTableCell>
-            <StyledTableCell align="right">Total Present Absent</StyledTableCell>
+            <StyledTableCell align="right">Present</StyledTableCell>
+            <StyledTableCell align="right">Total Lecture</StyledTableCell>
             <StyledTableCell align="right">Percentage&nbsp;</StyledTableCell>
           </TableRow>
         </TableHead>
@@ -51,11 +52,14 @@ export default function Dashboard() {
           {attendanceData.length > 0 ? (
             attendanceData.map((att, index) => (
               <TableRow key={index}>
+                
                 <StyledTableCell component="th" scope="row">
                   {att.subjectName} {/* Use subject name from attendance data */}
                 </StyledTableCell>
                 
                 <StyledTableCell align="right">{att.totalPresentAbsent}</StyledTableCell>
+                <StyledTableCell align="right">{att.totalPresentAbsent}</StyledTableCell>
+                
 				<StyledTableCell align="right">{att.percentage}%</StyledTableCell>
               </TableRow>
             ))

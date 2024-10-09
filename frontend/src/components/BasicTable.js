@@ -9,15 +9,18 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { styled } from '@mui/material/styles';
 
-// Custom styling for the table
+// Custom styling for the table container and cells
 const StyledTableContainer = styled(TableContainer)({
-  backgroundColor: 'black', // Table background color
-  color: 'white', // Text color for the table
+  backgroundColor: 'blue', // Background color for the container
 });
 
 const StyledTableCell = styled(TableCell)({
   color: 'white', // Text color for the cells
   borderColor: 'white', // Border color for the cells
+});
+
+const StyledTableRow = styled(TableRow)({
+  backgroundColor: 'blue', // Background color for the table rows
 });
 
 export default function BasicTable() {
@@ -41,29 +44,29 @@ export default function BasicTable() {
     <StyledTableContainer component={Paper} style={{ width: '600px' }}>
       <Table sx={{ minWidth: 300 }} aria-label="simple table">
         <TableHead>
-          <TableRow>
+          <StyledTableRow>
             <StyledTableCell>Subjects</StyledTableCell>
             <StyledTableCell align="right">Attendance</StyledTableCell>
             <StyledTableCell align="right">Lectures attended&nbsp;</StyledTableCell>
-          </TableRow>
+          </StyledTableRow>
         </TableHead>
         <TableBody>
           {attendanceData.length > 0 ? (
             attendanceData.map((att, index) => (
-              <TableRow key={index}>
+              <StyledTableRow key={index}>
                 <StyledTableCell component="th" scope="row">
                   {att.subjectName} {/* Use subject name from attendance data */}
                 </StyledTableCell>
                 <StyledTableCell align="right">{att.status}</StyledTableCell>
                 <StyledTableCell align="right">{att.lecturesAttended}</StyledTableCell>
-              </TableRow>
+              </StyledTableRow>
             ))
           ) : (
-            <TableRow>
+            <StyledTableRow>
               <StyledTableCell colSpan={3} align="center">
                 No attendance data available
               </StyledTableCell>
-            </TableRow>
+            </StyledTableRow>
           )}
         </TableBody>
       </Table>

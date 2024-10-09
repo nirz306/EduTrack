@@ -7,7 +7,7 @@ import Dashboard from "./components/Dashboard"
 function App() {
   return (
     <div>
-      <h1 className = " text-2xl flex justify-center items-center mt-4">Welcome to the Student Attendance Management System</h1>
+      <h1 className = " text-3xl flex justify-center items-center text-[#293d75] mt-4">Welcome to the Student Attendance Management System</h1>
       <div className="flex justify-center items-center mt-10">
 	  
  
