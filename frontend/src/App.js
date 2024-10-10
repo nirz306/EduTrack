@@ -1,37 +1,36 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes, useNavigate } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, useNavigate, useLocation } from 'react-router-dom';
 import Dashboard from "./components/Dashboard";
-import AttendanceButton from "./components/AttendanceButtons";
-import TotalPresentTotalAbsentButton from "./components/TotalPresentTotalAbsentButton";
-import BasicTable from "./components/BasicTable";
-import Datewise from "./components/Datewise";  // Import the Datewise component
+import Datewise from "./components/Datewise";
+import RollNoInput from './components/RollNoInput';
 import './index.css';
-
 import { Sidenav, Nav, IconButton } from 'rsuite';
 import DashboardIcon from '@rsuite/icons/legacy/Dashboard';
-import GroupIcon from '@rsuite/icons/legacy/Group'; // Icon for Datewise Attendance
-import MagicIcon from '@rsuite/icons/legacy/Magic';
-import GearCircleIcon from '@rsuite/icons/legacy/GearCircle';
-import MenuIcon from '@rsuite/icons/Menu'; // Icon for collapse
+import GroupIcon from '@rsuite/icons/legacy/Group';
+import MenuIcon from '@rsuite/icons/Menu';
 
 const App = () => {
   const [expanded, setExpanded] = React.useState(true);
   const [activeKey, setActiveKey] = React.useState('1');
-  const navigate = useNavigate(); // useNavigate hook to programmatically navigate
+  const navigate = useNavigate();
+  const location = useLocation(); // Get current location
+
+  // Extract rollNo from query params
+  const queryParams = new URLSearchParams(location.search);
+  const rollNo = queryParams.get('rollNo');
 
   const handleSelect = (eventKey) => {
     setActiveKey(eventKey);
     if (eventKey === '1') {
-      navigate('/'); // Navigate to Dashboard
+      navigate(`/dashboard?rollNo=${rollNo}`); // Navigate to Dashboard with roll number
     } else if (eventKey === '2') {
-      navigate('/datewise'); // Navigate to Datewise Attendance
+      navigate(`/datewise?rollNo=${rollNo}`); // Navigate to Datewise Attendance with roll number
     }
-    // Add other routes if needed
   };
 
   return (
     <>
-      <div className='flex align-center'>
+      <div className="flex align-center">
         <div style={{ width: 240 }}>
           <IconButton
             icon={<MenuIcon style={{ color: '#293d75' }} />}
@@ -39,43 +38,17 @@ const App = () => {
             appearance="subtle"
             style={{ marginBottom: 10 }}
           />
-          <Sidenav
-            expanded={expanded}
-            style={{ backgroundColor: '#293d75' }}
-          >
+          <Sidenav expanded={expanded} style={{ backgroundColor: '#293d75' }}>
             <Sidenav.Body>
-              <Nav activeKey={activeKey} onSelect={handleSelect}  style={{ color: '#293d75' }}>
-                <Nav.Item
-                  eventKey="1"
-				  icon={<DashboardIcon style={{ color: '#293d75' }} />} // White icons
-				   style={{ color: '#293d75' }} // White text
-                >
+              <Nav activeKey={activeKey} onSelect={handleSelect} style={{ color: '#293d75' }}>
+                <Nav.Item eventKey="1" icon={<DashboardIcon style={{ color: '#293d75' }} />}>
                   Dashboard
                 </Nav.Item>
-                <Nav.Item
-                  eventKey="2"
-				  icon={<GroupIcon style={{ color: '#293d75' }} />} // Icon for "Datewise attendance"
-				  style={{ color: '#293d75' }}
-                >
+                <Nav.Item eventKey="2" icon={<GroupIcon style={{ color: '#293d75' }} />}>
                   Datewise Attendance
-                </Nav.Item>
-                <Nav.Item
-                  eventKey="3"
-				  icon={<MagicIcon style={{ color: '#293d75' }} />} // Icon for "Accounts"
-				               style={{ color: '#293d75' }}
-                >
-                  Accounts
-                </Nav.Item>
-                <Nav.Item
-                  eventKey="4"
-				  icon={<GearCircleIcon style={{ color: '#293d75' }} />} // Icon for another item
-				                style={{ color: '#293d75' }}
-                >
-                  Settings
                 </Nav.Item>
               </Nav>
             </Sidenav.Body>
-			{/* <Sidenav.Toggle onToggle={expanded => setExpanded(expanded)} /> */}
           </Sidenav>
         </div>
 
@@ -85,9 +58,9 @@ const App = () => {
           </h1>
           <div className="flex justify-center items-center mt-10">
             <Routes>
-              <Route path="/" element={<Dashboard />} />
-              <Route path="/datewise" element={<Datewise />} />
-              {/* Add more routes here if needed */}
+              <Route path="/" element={<RollNoInput />} /> {/* Roll Number Input as default */}
+              <Route path="/dashboard" element={<Dashboard rollNo={rollNo} />} /> {/* Pass rollNo */}
+              <Route path="/datewise" element={<Datewise rollNo={rollNo} />} /> {/* Pass rollNo */}
             </Routes>
           </div>
         </div>

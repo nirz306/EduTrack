@@ -20,22 +20,24 @@ const StyledTableCell = styled(TableCell)({
   borderColor: 'white', // Border color for the cells
 });
 
-export default function Dashboard() {
+export default function Dashboard({ rollNo }) {
   const [attendanceData, setAttendanceData] = useState([]);
 
   // Fetch attendance data using axios when the component mounts
   useEffect(() => {
-    axios
-      .get('http://localhost:8080/dashboard', {
-        params: { studentId: 1 } // Replace 1 with the actual student ID you want to fetch
-      })
-      .then(response => {
-        setAttendanceData(response.data);
-      })
-      .catch(error => {
-        console.error("There was an error fetching the attendance data!", error);
-      });
-  }, []); // Empty dependency array ensures this runs only once when the component mounts
+     if (rollNo) {
+       axios
+         .get('http://localhost:8080/dashboard', {
+           params: { rollNo }, // Use the rollNo passed from the parent component
+         })
+         .then((response) => {
+           setAttendanceData(response.data);
+         })
+         .catch((error) => {
+           console.error('There was an error fetching the attendance data!', error);
+         });
+     }
+   }, [rollNo]);
 
   return (
     <StyledTableContainer component={Paper} style={{ width: '600px' }}>

@@ -12,16 +12,16 @@ import java.util.*;
 public class AttendanceDAO 
 {
 	
-	public List<Attendance> getAttendanceByStudentId(int studentId) {
+	public List<Attendance> getAttendanceByStudentId(int rollNo) {
         List<Attendance> attendanceList = new ArrayList<>();
         String sql = "SELECT s.name, sub.subjectName, a.attendanceDate, a.status FROM attendance a "
                    + "JOIN student s ON a.studentId = s.studentId "
-                   + "JOIN subjects sub ON a.subjectId = sub.subjectId WHERE s.studentId = ? ORDER BY attendanceDate";
+                   + "JOIN subjects sub ON a.subjectId = sub.subjectId WHERE s.rollNo = ? ORDER BY attendanceDate";
 
         try (Connection connection = DatabaseConfig.getConnection();
              PreparedStatement statement = connection.prepareStatement(sql)) {
 
-            statement.setInt(1, studentId);
+            statement.setInt(1, rollNo);
             ResultSet rs = statement.executeQuery();
 
             while (rs.next()) {
@@ -41,16 +41,16 @@ public class AttendanceDAO
     }
 	
 	
-	public List<Student> getTotalAbsentTotalPresentByStudentId(int studentId) {
+	public List<Student> getTotalAbsentTotalPresentByStudentId(int rollNo) {
         List<Student> studentList = new ArrayList<>();
         String sql = "select s.name, sub.subjectName , count(case when a.status = 'P' then 1 end) as total_present , count(case when a.status = 'A' "
         		+ "then 1 end) as total_absent from attendance a join student s on a.studentId = s.studentId join subjects sub "
-        		+ " on a.subjectId = sub.subjectId where s.studentId = ? group by s.name , sub.subjectName";
+        		+ " on a.subjectId = sub.subjectId where s.rollNo = ? group by s.name , sub.subjectName";
 
         try (Connection connection = DatabaseConfig.getConnection();
              PreparedStatement statement = connection.prepareStatement(sql)) {
 
-            statement.setInt(1, studentId);
+            statement.setInt(1, rollNo);
             ResultSet rs = statement.executeQuery();
 
             while (rs.next()) {
@@ -69,7 +69,7 @@ public class AttendanceDAO
         return studentList;
     }
 	
-	public List<UpdatedStudent> getDashboard(int studentId) {
+	public List<UpdatedStudent> getDashboard(int rollNo) {
         List<UpdatedStudent> dashboardList = new ArrayList<>();
         String sql = "SELECT sub.subjectName, "
                 + "count(CASE WHEN a.status = 'P' THEN 1 END) AS totalPresent, "
@@ -78,14 +78,14 @@ public class AttendanceDAO
                 + "FROM attendance a "
                 + "JOIN student s ON a.studentId = s.studentId "
                 + "JOIN subjects sub ON a.subjectId = sub.subjectId "
-                + "WHERE s.studentId = ? "
+                + "WHERE s.rollNo = ? "
                 + "GROUP BY sub.subjectName";
 
 
         try (Connection connection = DatabaseConfig.getConnection();
              PreparedStatement statement = connection.prepareStatement(sql)) {
 
-            statement.setInt(1, studentId);
+            statement.setInt(1, rollNo);
             ResultSet rs = statement.executeQuery();
 
             while (rs.next()) {
@@ -105,7 +105,7 @@ public class AttendanceDAO
         return dashboardList;
     }
 	
-	public List<DateWise> getDatewise(int studentId) {
+	public List<DateWise> getDatewise(int rollNo) {
         List<DateWise> datewiseList = new ArrayList<>();
         String sql = "SELECT a.attendanceDate, "
                 + "MAX(CASE WHEN sub.subjectName = 'DBMS' THEN a.status END) AS DBMS, "
@@ -116,7 +116,7 @@ public class AttendanceDAO
                 + "FROM attendance a "
                 + "JOIN subjects sub ON a.subjectId = sub.subjectId "
                 + "JOIN student s ON a.studentId = s.studentId "
-                + "WHERE s.studentId = ? "
+                + "WHERE s.rollNo = ? "
                 + "GROUP BY a.attendanceDate "
                 + "ORDER BY a.attendanceDate";
 
@@ -124,7 +124,7 @@ public class AttendanceDAO
         try (Connection connection = DatabaseConfig.getConnection();
              PreparedStatement statement = connection.prepareStatement(sql)) {
 
-            statement.setInt(1, studentId);
+            statement.setInt(1, rollNo);
             ResultSet rs = statement.executeQuery();
 
             while (rs.next()) {

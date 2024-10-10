@@ -31,13 +31,13 @@ public class AttendanceController {
     */
 	
 	 @GetMapping("/dashboard")
-    public List<UpdatedStudent> getDashboard(@RequestParam int studentId) {
-        return attendanceDAO.getDashboard(studentId);
+    public List<UpdatedStudent> getDashboard(@RequestParam int rollNo) {
+        return attendanceDAO.getDashboard(rollNo);
     }
 	 
 	 @GetMapping("/datewise")
-	    public List<DateWise> getDatewise(@RequestParam int studentId) {
-	        return attendanceDAO.getDatewise(studentId);
+	    public List<DateWise> getDatewise(@RequestParam int rollNo) {
+	        return attendanceDAO.getDatewise(rollNo);
 	    }
     
     

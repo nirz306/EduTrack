@@ -8,6 +8,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { styled } from '@mui/material/styles';
+import { useLocation } from 'react-router-dom'; // Import useLocation to get query params
 
 // Custom styling for the table
 const StyledTableContainer = styled(TableContainer)({
@@ -20,22 +21,27 @@ const StyledTableCell = styled(TableCell)({
   borderColor: 'white', // Border color for the cells
 });
 
-export default function Dashboard() {
+export default function Datewise({ rollNo }) {
   const [attendanceData, setAttendanceData] = useState([]);
+
+
+ 
 
   // Fetch attendance data using axios when the component mounts
   useEffect(() => {
-    axios
-      .get('http://localhost:8080/datewise', {
-        params: { studentId: 1 } // Replace 1 with the actual student ID you want to fetch
-      })
-      .then(response => {
-        setAttendanceData(response.data);
-      })
-      .catch(error => {
-        console.error("There was an error fetching the attendance data!", error);
-      });
-  }, []); // Empty dependency array ensures this runs only once when the component mounts
+    if (rollNo) { // Ensure roll number exists
+      axios
+        .get('http://localhost:8080/datewise', {
+          params: { rollNo } // Use the roll number from the query parameters
+        })
+        .then(response => {
+          setAttendanceData(response.data);
+        })
+        .catch(error => {
+          console.error("There was an error fetching the attendance data!", error);
+        });
+    }
+  }, [rollNo]); // Dependency array includes rollNo to refetch when it changes
 
   return (
     <StyledTableContainer component={Paper} style={{ width: '600px' }}>
@@ -44,10 +50,10 @@ export default function Dashboard() {
           <TableRow>
             <StyledTableCell>Date</StyledTableCell>
             <StyledTableCell align="right">DBMS</StyledTableCell>
-            <StyledTableCell align="right">TOC&nbsp;</StyledTableCell>
-            <StyledTableCell align="right">CNS&nbsp;</StyledTableCell>
-            <StyledTableCell align="right">SPOS&nbsp;</StyledTableCell>
-            <StyledTableCell align="right">HCI&nbsp;</StyledTableCell>
+            <StyledTableCell align="right">TOC</StyledTableCell>
+            <StyledTableCell align="right">CNS</StyledTableCell>
+            <StyledTableCell align="right">SPOS</StyledTableCell>
+            <StyledTableCell align="right">HCI</StyledTableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -55,20 +61,18 @@ export default function Dashboard() {
             attendanceData.map((att, index) => (
               <TableRow key={index}>
                 <StyledTableCell component="th" scope="row">
-                  {att.attendanceDate} {/* Use subject name from attendance data */}
+                  {att.attendanceDate} {/* Date of the attendance */}
                 </StyledTableCell>
-                
                 <StyledTableCell align="right">{att.dbms_status}</StyledTableCell>
-				<StyledTableCell align="right">{att.toc_status}</StyledTableCell>
-				<StyledTableCell align="right">{att.cns_status}</StyledTableCell>
-				<StyledTableCell align="right">{att.spos_status}</StyledTableCell>
-				<StyledTableCell align="right">{att.hci_status}</StyledTableCell>
-				
+                <StyledTableCell align="right">{att.toc_status}</StyledTableCell>
+                <StyledTableCell align="right">{att.cns_status}</StyledTableCell>
+                <StyledTableCell align="right">{att.spos_status}</StyledTableCell>
+                <StyledTableCell align="right">{att.hci_status}</StyledTableCell>
               </TableRow>
             ))
           ) : (
             <TableRow>
-              <StyledTableCell colSpan={3} align="center">
+              <StyledTableCell colSpan={6} align="center">
                 No attendance data available
               </StyledTableCell>
             </TableRow>
