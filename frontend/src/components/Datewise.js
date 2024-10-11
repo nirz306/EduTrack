@@ -8,17 +8,17 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { styled } from '@mui/material/styles';
-import { useLocation } from 'react-router-dom'; // Import useLocation to get query params
+import { useLocation } from 'react-router-dom';  
 
-// Custom styling for the table
+ 
 const StyledTableContainer = styled(TableContainer)({
-  backgroundColor: '#293d75', // Table background color
-  color: 'white', // Text color for the table
+  backgroundColor: '#293d75',  
+  color: 'white',  
 });
 
 const StyledTableCell = styled(TableCell)({
-  color: 'white', // Text color for the cells
-  borderColor: 'white', // Border color for the cells
+  color: 'white',  
+  borderColor: 'white',  
 });
 
 export default function Datewise({ rollNo }) {
@@ -27,12 +27,12 @@ export default function Datewise({ rollNo }) {
 
  
 
-  // Fetch attendance data using axios when the component mounts
+   
   useEffect(() => {
-    if (rollNo) { // Ensure roll number exists
+    if (rollNo) {  
       axios
         .get('http://localhost:8080/datewise', {
-          params: { rollNo } // Use the roll number from the query parameters
+          params: { rollNo }  
         })
         .then(response => {
           setAttendanceData(response.data);
@@ -41,7 +41,7 @@ export default function Datewise({ rollNo }) {
           console.error("There was an error fetching the attendance data!", error);
         });
     }
-  }, [rollNo]); // Dependency array includes rollNo to refetch when it changes
+  }, [rollNo]);  
 
   return (
     <StyledTableContainer component={Paper} style={{ width: '600px' }}>
@@ -61,7 +61,7 @@ export default function Datewise({ rollNo }) {
             attendanceData.map((att, index) => (
               <TableRow key={index}>
                 <StyledTableCell component="th" scope="row">
-                  {att.attendanceDate} {/* Date of the attendance */}
+                  {att.attendanceDate} { }
                 </StyledTableCell>
                 <StyledTableCell align="right">{att.dbms_status}</StyledTableCell>
                 <StyledTableCell align="right">{att.toc_status}</StyledTableCell>

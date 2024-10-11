@@ -13,24 +13,25 @@ const App = () => {
   const [expanded, setExpanded] = React.useState(true);
   const [activeKey, setActiveKey] = React.useState('1');
   const navigate = useNavigate();
-  const location = useLocation(); // Get current location
+  const location = useLocation();  
 
-  // Extract rollNo from query params
+   
   const queryParams = new URLSearchParams(location.search);
   const rollNo = queryParams.get('rollNo');
 
   const handleSelect = (eventKey) => {
     setActiveKey(eventKey);
     if (eventKey === '1') {
-      navigate(`/dashboard?rollNo=${rollNo}`); // Navigate to Dashboard with roll number
+      navigate(`/dashboard?rollNo=${rollNo}`);  
     } else if (eventKey === '2') {
-      navigate(`/datewise?rollNo=${rollNo}`); // Navigate to Datewise Attendance with roll number
+      navigate(`/datewise?rollNo=${rollNo}`);  
     }
   };
 
   return (
     <>
-      <div className="flex align-center">
+      <div className="flex">
+        {/* navbar */}
         <div style={{ width: 240 }}>
           <IconButton
             icon={<MenuIcon style={{ color: '#293d75' }} />}
@@ -52,15 +53,15 @@ const App = () => {
           </Sidenav>
         </div>
 
-        <div>
-          <h1 className="text-3xl flex justify-center items-center text-[#293d75] mt-4">
+        <div className='mx-auto'>
+          <h1 className="text-3xl flex justify-center items-center mx-auto  text-[#293d75] mt-10">
             Welcome to the Student Attendance Management System
           </h1>
-          <div className="flex justify-center items-center mt-10">
+          <div className="flex justify-center mx-auto mt-10">
             <Routes>
-              <Route path="/" element={<RollNoInput />} /> {/* Roll Number Input as default */}
-              <Route path="/dashboard" element={<Dashboard rollNo={rollNo} />} /> {/* Pass rollNo */}
-              <Route path="/datewise" element={<Datewise rollNo={rollNo} />} /> {/* Pass rollNo */}
+              <Route path="/" element={<RollNoInput />} /> { }
+              <Route path="/dashboard" element={<Dashboard rollNo={rollNo} />} /> {}
+              <Route path="/datewise" element={<Datewise rollNo={rollNo} />} /> { }
             </Routes>
           </div>
         </div>

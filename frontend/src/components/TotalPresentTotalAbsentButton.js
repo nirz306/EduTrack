@@ -7,7 +7,7 @@ function TotalPresentTotalAbsentButton() {
   const fetchAttendance = () => {
 	console.log('Button clicked!');  
     axios.get('http://localhost:8080/student', 	{
-	  params: { studentId: 1 } // Replace 1 with the actual student ID you want to fetch
+	  params: { studentId: 1 }    
 	})
       .then(response => {
         setAttendanceData(response.data);

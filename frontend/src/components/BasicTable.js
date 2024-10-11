@@ -9,28 +9,27 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { styled } from '@mui/material/styles';
 
-// Custom styling for the table container and cells
-const StyledTableContainer = styled(TableContainer)({
-  backgroundColor: 'blue', // Background color for the container
+ const StyledTableContainer = styled(TableContainer)({
+  backgroundColor: 'blue',  
 });
 
 const StyledTableCell = styled(TableCell)({
-  color: 'white', // Text color for the cells
-  borderColor: 'white', // Border color for the cells
+  color: 'white', 
+  borderColor: 'white',  
 });
 
 const StyledTableRow = styled(TableRow)({
-  backgroundColor: 'blue', // Background color for the table rows
+  backgroundColor: 'blue', 
 });
 
 export default function BasicTable() {
   const [attendanceData, setAttendanceData] = useState([]);
 
-  // Fetch attendance data using axios when the component mounts
+   
   useEffect(() => {
     axios
       .get('http://localhost:8080/attendance', {
-        params: { studentId: 1 } // Replace 1 with the actual student ID you want to fetch
+        params: { studentId: 1 }  
       })
       .then(response => {
         setAttendanceData(response.data);
@@ -38,8 +37,7 @@ export default function BasicTable() {
       .catch(error => {
         console.error("There was an error fetching the attendance data!", error);
       });
-  }, []); // Empty dependency array ensures this runs only once when the component mounts
-
+  }, []);  
   return (
     <StyledTableContainer component={Paper} style={{ width: '600px' }}>
       <Table sx={{ minWidth: 300 }} aria-label="simple table">
@@ -55,7 +53,7 @@ export default function BasicTable() {
             attendanceData.map((att, index) => (
               <StyledTableRow key={index}>
                 <StyledTableCell component="th" scope="row">
-                  {att.subjectName} {/* Use subject name from attendance data */}
+                  {att.subjectName} { }
                 </StyledTableCell>
                 <StyledTableCell align="right">{att.status}</StyledTableCell>
                 <StyledTableCell align="right">{att.lecturesAttended}</StyledTableCell>

@@ -9,15 +9,15 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { styled } from '@mui/material/styles';
 
-// Custom styling for the table
+ 
 const StyledTableContainer = styled(TableContainer)({
-  backgroundColor: '#293d75', // Table background color
-  color: 'white', // Text color for the table
+  backgroundColor: '#293d75', 
+  color: 'white',  
 });
 
 const StyledTableCell = styled(TableCell)({
-  color: 'white', // Text color for the cells
-  borderColor: 'white', // Border color for the cells
+  color: 'white', 
+  borderColor: 'white',  
 });
 
 export default function Dashboard({ rollNo }) {
@@ -56,7 +56,7 @@ export default function Dashboard({ rollNo }) {
               <TableRow key={index}>
                 
                 <StyledTableCell component="th" scope="row">
-                  {att.subjectName} {/* Use subject name from attendance data */}
+                  {att.subjectName} {}
                 </StyledTableCell>
                 
                 <StyledTableCell align="right">{att.totalPresent}</StyledTableCell>

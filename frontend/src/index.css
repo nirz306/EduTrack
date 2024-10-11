@@ -4,4 +4,10 @@
 
 @import "rsuite/dist/rsuite.css";
 
-#root{ padding: 10px; }
+#root { 
+  padding: 10px; 
+}
+
+body {
+  @apply font-serif;
+}
