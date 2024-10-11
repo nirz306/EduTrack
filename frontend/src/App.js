@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes, useNavigate, useLocation } from 'react-router-dom';
-import Dashboard from "./components/Dashboard";
+import Dashboard from "./components/studentDashboard";
 import Datewise from "./components/Datewise";
 import RollNoInput from './components/RollNoInput';
 import './index.css';
@@ -8,6 +8,9 @@ import { Sidenav, Nav, IconButton } from 'rsuite';
 import DashboardIcon from '@rsuite/icons/legacy/Dashboard';
 import GroupIcon from '@rsuite/icons/legacy/Group';
 import MenuIcon from '@rsuite/icons/Menu';
+import LandingPage from './components/landingpage';
+import TeacherLandingPage from './components/teacherSelectSubject';
+import TeacherDashboard from './components/teacherDashboard';
 
 const App = () => {
   const [expanded, setExpanded] = React.useState(true);
@@ -54,14 +57,15 @@ const App = () => {
         </div>
 
         <div className='mx-auto'>
-          <h1 className="text-3xl flex justify-center items-center mx-auto  text-[#293d75] mt-10">
-            Welcome to the Student Attendance Management System
-          </h1>
+       
           <div className="flex justify-center mx-auto mt-10">
             <Routes>
-              <Route path="/" element={<RollNoInput />} /> { }
-              <Route path="/dashboard" element={<Dashboard rollNo={rollNo} />} /> {}
-              <Route path="/datewise" element={<Datewise rollNo={rollNo} />} /> { }
+              <Route path="/" element={<LandingPage/>} />
+              <Route path="/student" element={<RollNoInput />} />
+              <Route path="/teacher" element={<TeacherLandingPage />} />  
+              <Route path="/teacherDashboard" element={<TeacherDashboard />} />  
+              <Route path="/dashboard" element={<Dashboard rollNo={rollNo} />} />
+              <Route path="/datewise" element={<Datewise rollNo={rollNo} />} /> 
             </Routes>
           </div>
         </div>

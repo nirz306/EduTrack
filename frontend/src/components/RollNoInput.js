@@ -12,10 +12,14 @@ export default function RollNoInput() {
   };
 
   return (
-       <div className="bg-[#293d75] shadow-lg rounded-lg p-16 w-4/1 max-w-4xl">
+    <div> 
+      <h1 className="text-3xl flex justify-center items-center mx-auto  text-[#293d75] mt-10">
+        Welcome Student
+      </h1> 
+       <div className="bg-[#293d75] shadow-lg rounded-lg p-16 w-4/1 max-w-4xl mt-3">
         <h2 className="text-3xl font-semibold mb-6 text-center text-white">Enter Your Roll Number</h2>
         <form onSubmit={handleSubmit} className="space-y-6">
-          <div>
+          <div className='flex flex-col'>
             <label className="block text-white text-base font-medium mb-2 f">Roll Number:</label>
             <input
               type="text"
@@ -27,11 +31,12 @@ export default function RollNoInput() {
           </div>
           <button
             type="submit"
-            className="w-full bg-white text-[#293d75] py-2 rounded-lg hover:bg-green-600 hover:text-white transition-colors duration-300 text-lg font-semibold"
+            className=" bg-white text-[#293d75] py-2 rounded-lg hover:bg-green-600 hover:text-white transition-colors duration-300 text-lg font-semibold w-[100px] mx-auto"
           >
             Submit
           </button>
         </form>
-      </div>
+      </div> 
+      </div> 
    );
 }
