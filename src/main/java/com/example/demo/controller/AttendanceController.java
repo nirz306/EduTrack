@@ -4,6 +4,8 @@ import com.example.demo.dao.AttendanceDAO;
 import com.example.demo.model.Attendance;
 import com.example.demo.model.DateWise;
 import com.example.demo.model.Student;
+import com.example.demo.model.TeacherDashboard;
+import com.example.demo.model.TeacherDatewise;
 import com.example.demo.model.UpdatedStudent;
 
 import org.springframework.web.bind.annotation.GetMapping;
@@ -38,6 +40,17 @@ public class AttendanceController {
 	 @GetMapping("/datewise")
 	    public List<DateWise> getDatewise(@RequestParam int rollNo) {
 	        return attendanceDAO.getDatewise(rollNo);
+	    }
+	 
+	 @GetMapping("/TeacherDashboard")
+	    public List<TeacherDashboard> getTeacherDashboard(@RequestParam String subjectName) {
+	        return attendanceDAO.getTeacherDashboard(subjectName);
+	    }
+ 
+	 
+	 @GetMapping("/TeacherDatewise")
+	    public List<TeacherDatewise> getTeacherDatewise(@RequestParam String subjectName) {
+	        return attendanceDAO.getTeacherDatewise(subjectName);
 	    }
     
     

@@ -46,7 +46,7 @@ export default function LandingPage() {
         </FormControl>
         <button
           className="border p-3 rounded-lg bg-[#293d75] text-white hover:bg-green-800 w-[100px] mx-auto"
-          onClick={handleSubmit} // Call handleSubmit when button is clicked
+          onClick={handleSubmit} 
         >
           Submit
         </button>

@@ -23,14 +23,14 @@ const StyledTableCell = styled(TableCell)({
 export default function TeacherDashboard() {
   const [attendanceData, setAttendanceData] = useState([]);
   const location = useLocation();  // Get location object to access the state
-  const subject = location.state?.subject;  // Extract subject from the state
+  const subjectName = location.state?.subjectName;  // Extract subject from the state
 
   useEffect(() => {
-    if (subject) {
-      console.log('Selected Subject:', subject);
+    if (subjectName) {
+      console.log('Selected Subject:', subjectName);
       axios
         .get('http://localhost:8080/TeacherDashboard', {
-          params: { subject },
+          params: { subjectName },
         })
         .then((response) => {
           setAttendanceData(response.data);
@@ -39,17 +39,19 @@ export default function TeacherDashboard() {
           console.error('Error fetching attendance data:', error);
         });
     }
-  }, [subject]);
+  }, [subjectName]);
 
   return (
-    <StyledTableContainer component={Paper} style={{ width: '600px' }}>
+    <StyledTableContainer component={Paper} style={{ width: '500px'}}>
       <Table sx={{ minWidth: 300 }} aria-label="attendance table">
         <TableHead>
           <TableRow>
-            <StyledTableCell>Date</StyledTableCell>
-            <StyledTableCell align="right">Total Present</StyledTableCell>
-            <StyledTableCell align="right">Total Lectures</StyledTableCell>
-            <StyledTableCell align="right">Percentage</StyledTableCell>
+            <StyledTableCell>Roll No</StyledTableCell>
+            
+            <StyledTableCell align="right">Percentage Attendance</StyledTableCell>
+        
+			
+			
           </TableRow>
         </TableHead>
         <TableBody>
@@ -57,11 +59,10 @@ export default function TeacherDashboard() {
             attendanceData.map((att, index) => (
               <TableRow key={index}>
                 <StyledTableCell component="th" scope="row">
-                  {att.date}
+                  {att.rollNo}
                 </StyledTableCell>
-                <StyledTableCell align="right">{att.totalPresent}</StyledTableCell>
-                <StyledTableCell align="right">{att.totalLectures}</StyledTableCell>
-                <StyledTableCell align="right">{att.percentage}%</StyledTableCell>
+                <StyledTableCell align="right">{att.percentage}</StyledTableCell>
+              
               </TableRow>
             ))
           ) : (

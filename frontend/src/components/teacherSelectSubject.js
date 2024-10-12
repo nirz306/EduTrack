@@ -6,7 +6,7 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 
 export default function TeacherLandingPage() {
-  const [subject, setSubject] = useState('');
+  const [subjectName, setSubject] = useState('');
   const navigate = useNavigate();  // Create a navigate function using useNavigate hook
 
   const handleChange = (event) => {
@@ -14,8 +14,8 @@ export default function TeacherLandingPage() {
   };
 
   const handleSubmit = () => {
-    if (subject) {
-      navigate('/teacherDashboard', { state: { subject } });  // Pass the subject as state
+    if (subjectName) {
+      navigate('/teacherDashboard', { state: { subjectName } });  // Pass the subject as state
     } else {
       alert('Please select a subject.');
     }
@@ -33,8 +33,8 @@ export default function TeacherLandingPage() {
           <Select
             labelId="demo-select-small-label"
             id="demo-select-small"
-            value={subject}
-            label="Subject"
+            value={subjectName}
+            label="SubjectName"
             onChange={handleChange}
           >
             <MenuItem value="Dbms">DBMS</MenuItem>

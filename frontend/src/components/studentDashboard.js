@@ -28,7 +28,7 @@ export default function Dashboard({ rollNo }) {
      if (rollNo) {
        axios
          .get('http://localhost:8080/dashboard', {
-           params: { rollNo }, // Use the rollNo passed from the parent component
+           params: { rollNo },
          })
          .then((response) => {
            setAttendanceData(response.data);
