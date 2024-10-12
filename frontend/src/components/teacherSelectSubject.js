@@ -5,9 +5,11 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 
+
 export default function TeacherLandingPage() {
   const [subjectName, setSubject] = useState('');
-  const navigate = useNavigate();  // Create a navigate function using useNavigate hook
+
+  const navigate = useNavigate(); 
 
   const handleChange = (event) => {
     setSubject(event.target.value);
@@ -20,9 +22,15 @@ export default function TeacherLandingPage() {
       alert('Please select a subject.');
     }
   };
+  
+  
+
+   
+ 
 
   return (
     <div>
+	
       <h1 className="text-3xl flex justify-center items-center mx-auto text-[#293d75] mt-10">
         Welcome Teacher
       </h1>

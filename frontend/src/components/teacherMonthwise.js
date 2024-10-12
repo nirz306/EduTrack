@@ -36,14 +36,18 @@ export default function TeacherDashboard() {
   const handleSelect = (eventKey) => {
     setActiveKey(eventKey);
 	
+	if (eventKey === "1") {
+		      navigate("/teacherDashboard", { state: { subjectName } }); // Pass subjectName as state
+		    }
+	
 	if (eventKey === "2") {
 	      navigate("/teacherDatewise", { state: { subjectName } }); // Pass subjectName as state
 	    }
 		
-		if(eventKey == '3')
-				{
-					navigate("/teacherMonthwise", { state: { subjectName } }); // Pass subjectName as state
-				}
+	if(eventKey == '3')
+		{
+			navigate("/teacherMonthwise", { state: { subjectName } }); // Pass subjectName as state
+		}
   };
 
   // Define menu items to send as props
@@ -69,7 +73,7 @@ export default function TeacherDashboard() {
     if (subjectName) {
       console.log("Selected Subject:", subjectName);
       axios
-        .get("http://localhost:8080/TeacherDashboard", {
+        .get("http://localhost:8080/TeacherMonthwise", {
           params: { subjectName },
         })
         .then((response) => {
@@ -101,8 +105,12 @@ export default function TeacherDashboard() {
              
            
                 <StyledTableCell align="right">
-                  Percentage&nbsp;
+                 Month&nbsp;
                 </StyledTableCell>
+				
+				<StyledTableCell align="right">
+				  Percentage&nbsp;
+				 </StyledTableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -114,8 +122,12 @@ export default function TeacherDashboard() {
                     </StyledTableCell>
                     
                     <StyledTableCell align="right">
-                      {att.percentage}
+                      {att.month}
                     </StyledTableCell>
+					
+					<StyledTableCell align="right">
+					{att.percentage}
+					  </StyledTableCell>                                                                                                                                                                                                                                        
                   </TableRow>
                 ))
               ) : (

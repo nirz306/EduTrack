@@ -12,6 +12,7 @@ import LandingPage from './components/landingpage';
 import TeacherLandingPage from './components/teacherSelectSubject';
 import TeacherDashboard from './components/teacherDashboard';
 import TeacherDatewise from "./components/teacherDatewise";
+import TeacherMonthwise from "./components/teacherMonthwise";
 
 const App = () => {
   const [expanded, setExpanded] = React.useState(true);
@@ -39,9 +40,11 @@ const App = () => {
               <Route path="/student" element={<RollNoInput />} />
               <Route path="/teacher" element={<TeacherLandingPage />} />  
               <Route path="/teacherDashboard" element={<TeacherDashboard />} />  
-			        <Route path="/teacherDatewise" element={<TeacherDatewise />} /> 
+			   <Route path="/teacherDatewise" element={<TeacherDatewise />} /> 
+			   <Route path="/teacherMonthwise" element={<TeacherMonthwise />} /> 
               <Route path="/dashboard" element={<Dashboard rollNo={rollNo} />} />
               <Route path="/datewise" element={<Datewise rollNo={rollNo} />} /> 
+			
             </Routes>
     </>
   );

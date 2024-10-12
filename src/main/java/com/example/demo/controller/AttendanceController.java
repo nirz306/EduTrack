@@ -6,6 +6,7 @@ import com.example.demo.model.DateWise;
 import com.example.demo.model.Student;
 import com.example.demo.model.TeacherDashboard;
 import com.example.demo.model.TeacherDatewise;
+import com.example.demo.model.TeacherMonthwise;
 import com.example.demo.model.UpdatedStudent;
 
 import org.springframework.web.bind.annotation.GetMapping;
@@ -53,5 +54,9 @@ public class AttendanceController {
 	        return attendanceDAO.getTeacherDatewise(subjectName);
 	    }
     
+	 @GetMapping("/TeacherMonthwise")
+	    public List<TeacherMonthwise> getTeacherMonthwise(@RequestParam String subjectName) {
+	        return attendanceDAO.getTeacherMonthwise(subjectName);
+	    }
     
 }

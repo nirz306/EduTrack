@@ -9,6 +9,11 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { styled } from '@mui/material/styles';
+import Navbar from "./navbar";
+import DashboardIcon from "@rsuite/icons/legacy/Dashboard"; // Import icons
+import GroupIcon from "@rsuite/icons/legacy/Group"; // Import icons
+import BarChartIcon from "@rsuite/icons/legacy/BarChart";
+import { useNavigate } from "react-router-dom"; // Import both useNavigate and useLocation here
 
 const StyledTableContainer = styled(TableContainer)({
   backgroundColor: '#293d75',
@@ -20,16 +25,19 @@ const StyledTableCell = styled(TableCell)({
   borderColor: 'white',
 });
 
-export default function TeacherDashboard() {
-  const [attendanceData, setAttendanceData] = useState([]);
-  const location = useLocation();  // Get location object to access the state
-  const subjectName = location.state?.subjectName;  // Extract subject from the state
+export default function TeacherDatewise() {
+	const [attendanceData, setAttendanceData] = useState([]);
+	 const [expanded, setExpanded] = useState(true);
+	 const location = useLocation(); // Get location object to access the state
+	 const subjectName = location.state?.subjectName; // Extract subject from the state
+	 const [activeKey, setActiveKey] = useState("1");
+	 const navigate = useNavigate(); // Ensure useNavigate is correctly defined
 
   useEffect(() => {
     if (subjectName) {
       console.log('Selected Subject:', subjectName);
       axios
-        .get('http://localhost:8080/TeacherDashboard', {
+        .get('http://localhost:8080/TeacherDatewise', {
           params: { subjectName },
         })
         .then((response) => {
@@ -40,9 +48,50 @@ export default function TeacherDashboard() {
         });
     }
   }, [subjectName]);
+  
+  const handleSelect = (eventKey) => {
+    setActiveKey(eventKey);
+
+  if (eventKey === "1") {
+        navigate("/teacherDashboard", { state: { subjectName } }); // Pass subjectName as state
+      }
+	  
+	  if(eventKey == '3')
+	  		{
+	  			navigate("/teacherMonthwise", { state: { subjectName } }); // Pass subjectName as state
+	  		}
+  };
+
+  // Define menu items to send as props
+  const menuItems = [
+    {
+      eventKey: "1",
+      label: "Student wise",
+      icon: <DashboardIcon style={{ color: "#293d75" }} />,
+    },
+    {
+      eventKey: "2",
+      label: "Datewise Attendance",
+      icon: <GroupIcon style={{ color: "#293d75" }} />,
+    },
+    {
+      eventKey: "3",
+      label: "Monthwise Attendance",
+      icon: <BarChartIcon style={{ color: "#293d75" }} />,
+    },
+  ];
 
   return (
-    <StyledTableContainer component={Paper} style={{ width: '900px'}}>
+	<div className="flex">
+	<Navbar
+	       handleSelect={handleSelect}
+	       activeKey={activeKey}
+	       expanded={expanded}
+	       setExpanded={setExpanded}
+	       menuItems={menuItems} // Pass menu items as props
+	     />
+	<div className="mt-[100px] mx-auto ">
+    <StyledTableContainer component={Paper} style={{ width: '1200px'}}>
       <Table sx={{ minWidth: 300 }} aria-label="attendance table">
         <TableHead>
           <TableRow>
@@ -111,5 +160,7 @@ export default function TeacherDashboard() {
         </TableBody>
       </Table>
     </StyledTableContainer>
+	</div>
+	</div>
   );
 }

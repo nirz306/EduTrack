@@ -6,6 +6,7 @@ import com.example.demo.model.DateWise;
 import com.example.demo.model.Student;
 import com.example.demo.model.TeacherDashboard;
 import com.example.demo.model.TeacherDatewise;
+import com.example.demo.model.TeacherMonthwise;
 import com.example.demo.model.UpdatedStudent;
 
 import java.sql.*;
@@ -259,6 +260,42 @@ public class AttendanceDAO
             e.printStackTrace();
         }
         return td_list;
+    }
+	
+	public List<TeacherMonthwise> getTeacherMonthwise(String subjectName) {
+		System.out.println("in teacher monthwise function");
+        List<TeacherMonthwise> t_list = new ArrayList<>();
+        String sql = "SELECT a.rollNo, "
+                + "DATE_FORMAT(a.attendanceDate, '%Y-%m') AS month, "
+                + "CONCAT(ROUND((SUM(CASE WHEN a.status = 'P' THEN 1 ELSE 0 END) / COUNT(*)) * 100, 2), '%') AS 'percentage' "
+                + "FROM attendance a "
+                + "JOIN subjects sub ON a.subjectId = sub.subjectId "
+                + "WHERE sub.subjectName = ? " 
+                + "GROUP BY a.rollNo, DATE_FORMAT(a.attendanceDate, '%Y-%m') "
+                + "ORDER BY a.rollNo, DATE_FORMAT(a.attendanceDate, '%Y-%m')";
+
+
+        try (Connection connection = DatabaseConfig.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+
+            statement.setString(1, subjectName);
+            ResultSet rs = statement.executeQuery();
+
+            while (rs.next()) {
+            	TeacherMonthwise tm = new TeacherMonthwise();
+               
+               tm.setRollNo(rs.getInt("rollNo"));
+               tm.setMonth(rs.getString("month"));
+               tm.setPercentage(rs.getString("percentage"));
+                
+
+                t_list.add(tm);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return t_list;
     }
 
 }
