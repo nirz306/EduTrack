@@ -25,10 +25,10 @@ export default function LandingPage() {
 
   return (
     <div>
-      <h1 className="text-3xl flex justify-center items-center mx-auto  text-[#293d75] mt-10">
+      <h1 className="text-3xl flex justify-center items-center mx-auto  text-[#293d75] mt-[200px]">
         Welcome to the Student Attendance Management System
       </h1>
-      <div className="flex flex-col mt-3">
+      <div className="flex flex-col mt-3 w-[500px] mx-auto">
         <div className="text-xl">Enter your access: </div>
         <FormControl sx={{ m: 1, minWidth: 320 }} size="small">
           <InputLabel id="demo-select-small-label">Access level:</InputLabel>

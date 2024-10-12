@@ -34,44 +34,15 @@ const App = () => {
 
   return (
     <>
-      <div className="flex">
-        {/* navbar */}
-        <div style={{ width: 240 }}>
-          <IconButton
-            icon={<MenuIcon style={{ color: '#293d75' }} />}
-            onClick={() => setExpanded(!expanded)}
-            appearance="subtle"
-            style={{ marginBottom: 10 }}
-          />
-          <Sidenav expanded={expanded} style={{ backgroundColor: '#293d75' }}>
-            <Sidenav.Body>
-              <Nav activeKey={activeKey} onSelect={handleSelect} style={{ color: '#293d75' }}>
-                <Nav.Item eventKey="1" icon={<DashboardIcon style={{ color: '#293d75' }} />}>
-                  Dashboard
-                </Nav.Item>
-                <Nav.Item eventKey="2" icon={<GroupIcon style={{ color: '#293d75' }} />}>
-                  Datewise Attendance
-                </Nav.Item>
-              </Nav>
-            </Sidenav.Body>
-          </Sidenav>
-        </div>
-
-        <div className='mx-auto'>
-       
-          <div className="flex justify-center mx-auto mt-10">
             <Routes>
               <Route path="/" element={<LandingPage/>} />
               <Route path="/student" element={<RollNoInput />} />
               <Route path="/teacher" element={<TeacherLandingPage />} />  
               <Route path="/teacherDashboard" element={<TeacherDashboard />} />  
-			  <Route path="/teacherDatewise" element={<TeacherDatewise />} /> 
+			        <Route path="/teacherDatewise" element={<TeacherDatewise />} /> 
               <Route path="/dashboard" element={<Dashboard rollNo={rollNo} />} />
               <Route path="/datewise" element={<Datewise rollNo={rollNo} />} /> 
             </Routes>
-          </div>
-        </div>
-      </div>
     </>
   );
 };

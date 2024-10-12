@@ -16,7 +16,7 @@ export default function RollNoInput() {
       <h1 className="text-3xl flex justify-center items-center mx-auto  text-[#293d75] mt-10">
         Welcome Student
       </h1> 
-       <div className="bg-[#293d75] shadow-lg rounded-lg p-16 w-4/1 max-w-4xl mt-3">
+       <div className="bg-[#293d75] shadow-lg rounded-lg p-16 w-4/1 max-w-4xl mt-3 mx-auto w-[500px]">
         <h2 className="text-3xl font-semibold mb-6 text-center text-white">Enter Your Roll Number</h2>
         <form onSubmit={handleSubmit} className="space-y-6">
           <div className='flex flex-col'>

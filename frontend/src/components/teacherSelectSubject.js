@@ -26,7 +26,7 @@ export default function TeacherLandingPage() {
       <h1 className="text-3xl flex justify-center items-center mx-auto text-[#293d75] mt-10">
         Welcome Teacher
       </h1>
-      <div className='flex flex-col mt-5'>
+      <div className='flex flex-col mt-5 w-[500px] mx-auto'>
         <div className='text-xl'>Enter your Subject:</div>
         <FormControl sx={{ m: 1, minWidth: 320 }} size="small">
           <InputLabel id="demo-select-small-label">Subjects:</InputLabel>
